@@ -44,10 +44,15 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <h1 className="text-3xl">To-Do App</h1>
+    <main className="mx-8 my-8 flex flex-col gap-8">
+      <div className="flex justify-between">
+        <h1 className="text-3xl">TODO</h1>
+        <button>D</button>
+      </div>
 
-      <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+      <form 
+        className="bg-gray-800 p-4 rounded flex gap-4" 
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
           if(inputRef.current) {
             const todo = inputRef.current.value
@@ -58,8 +63,14 @@ export default function Home() {
             }])
             inputRef.current.value = '' 
           }
-        }}>
-        <input ref={inputRef} className="text-blue-900" type="text"/>
+      }}>
+        <button className="text-gray-500">C</button>  
+        <input 
+          ref={inputRef} 
+          className="text-gray-500 bg-transparent" 
+          type="text"
+          placeholder="Create a new todo..."
+        />
       </form>
 
       <div>
