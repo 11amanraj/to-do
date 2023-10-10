@@ -14,8 +14,19 @@ export default function Home() {
       id: Math.random().toString(),
       text: 'First Todo',
       completed: false
+    },
+    {
+      id: Math.random().toString(),
+      text: 'Second Todo',
+      completed: true
+    },
+    {
+      id: Math.random().toString(),
+      text: 'Third Todo',
+      completed: false
     }
   ])
+  const [hideCompleted, setHideCompleted] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const todoDeleteHandler = (id: string) => {
@@ -52,14 +63,28 @@ export default function Home() {
       </form>
 
       <div>
-        {todos.map(todo => {
-          return (
-            <div key={todo.id} className={`flex gap-4 ${todo.completed ? 'bg-red-800' : 'bg-slate-800'}`}>
-              <p onClick={() => todoDeleteHandler(todo.id)}>Del</p>
-              <p onClick={() => todoCompleteHandler(todo.id)}>Done</p>
-              <p>{todo.text}</p>
-            </div>)
-        })}
+        {todos
+          .filter(todo => {
+            if(!hideCompleted) {
+              return true
+            } else {
+              return todo.completed
+            }
+          })
+          .map(todo => {
+            return (
+              <div key={todo.id} className={`flex gap-4 ${todo.completed ? 'bg-red-800' : 'bg-slate-800'}`}>
+                <p onClick={() => todoDeleteHandler(todo.id)}>Del</p>
+                <p onClick={() => todoCompleteHandler(todo.id)}>Done</p>
+                <p>{todo.text}</p>
+              </div>)
+          })
+        }
+      </div>
+
+      <div className="flex gap-4">
+        <button onClick={() => setHideCompleted(false)} className="bg-slate-700">Show All</button>
+        <button onClick={() => setHideCompleted(true)} className="bg-slate-700">Hide Completed</button>
       </div>
     </main>
   )
