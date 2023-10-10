@@ -102,9 +102,10 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex gap-4">
-        <button onClick={() => setHideCompleted(false)} className="bg-slate-700">Show All</button>
-        <button onClick={() => setHideCompleted(true)} className="bg-slate-700">Hide Completed</button>
+      <div className="bg-gray-800 p-4 rounded flex gap-4 justify-center">
+        <button onClick={() => setHideCompleted(false)} className={`${!hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>All</button>
+        {/* <button onClick={() => setHideCompleted(false)} className={`bg-slate-700 ${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Active</button> */}
+        <button onClick={() => setHideCompleted(true)} className={`${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Completed</button>
       </div>
     </main>
   )
