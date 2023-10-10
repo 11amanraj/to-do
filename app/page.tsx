@@ -74,8 +74,8 @@ export default function Home() {
           .map(todo => {
             return (
               <div key={todo.id} className={`flex gap-4 ${todo.completed ? 'bg-red-800' : 'bg-slate-800'}`}>
-                <p onClick={() => todoDeleteHandler(todo.id)}>Del</p>
-                <p onClick={() => todoCompleteHandler(todo.id)}>Done</p>
+                <button className="bg-slate-700" onClick={() => todoDeleteHandler(todo.id)}>Del</button>
+                <button className="bg-slate-700" onClick={() => todoCompleteHandler(todo.id)}>Done</button>
                 <p>{todo.text}</p>
               </div>)
           })
