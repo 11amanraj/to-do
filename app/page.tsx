@@ -23,6 +23,15 @@ export default function Home() {
     setTodos([...updatedTodos])
   }
 
+  const todoCompleteHandler = (id: string) => {
+    const updatedTodos = todos.map(todo => {
+      if(todo.id === id) {
+        return {...todo, completed: !todo.completed}
+      } else return todo
+    })
+    setTodos([...updatedTodos])
+  }
+
   return (
     <main>
       <h1 className="text-3xl">To-Do App</h1>
@@ -45,8 +54,9 @@ export default function Home() {
       <div>
         {todos.map(todo => {
           return (
-            <div key={todo.id} className="flex gap-4">
+            <div key={todo.id} className={`flex gap-4 ${todo.completed ? 'bg-red-800' : 'bg-slate-800'}`}>
               <p onClick={() => todoDeleteHandler(todo.id)}>Del</p>
+              <p onClick={() => todoCompleteHandler(todo.id)}>Done</p>
               <p>{todo.text}</p>
             </div>)
         })}
