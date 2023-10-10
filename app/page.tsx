@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <main className="mx-8 my-8 flex flex-col gap-8">
       <div className="flex justify-between">
-        <h1 className="text-3xl">TODO</h1>
+        <h1 className="text-3xl">Whereas TODO</h1>
         <button>D</button>
       </div>
 
