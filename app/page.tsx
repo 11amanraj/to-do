@@ -73,7 +73,7 @@ export default function Home() {
         />
       </form>
 
-      <div>
+      <div className="bg-gray-800 rounded overflow-hidden flex flex-col" >
         {todos
           .filter(todo => {
             if(!hideCompleted) {
@@ -84,13 +84,22 @@ export default function Home() {
           })
           .map(todo => {
             return (
-              <div key={todo.id} className={`flex gap-4 ${todo.completed ? 'bg-red-800' : 'bg-slate-800'}`}>
-                <button className="bg-slate-700" onClick={() => todoDeleteHandler(todo.id)}>Del</button>
-                <button className="bg-slate-700" onClick={() => todoCompleteHandler(todo.id)}>Done</button>
-                <p>{todo.text}</p>
+              <div key={todo.id} className={`flex gap-4 p-6 border-b-2 border-b-slate-500`}>
+                <button className={`bg-slate-700 ${todo.completed ? 'text-gray-500' : 'text-gray-200'}`} onClick={() => todoCompleteHandler(todo.id)}>Done</button>
+                <div className="w-full flex justify-between">
+                  <p className={`${todo.completed ? 'line-through text-gray-500' : 'no-underline text-gray-200'}`}>{todo.text}</p>
+                  <button className={`bg-slate-700 ${todo.completed ? 'text-gray-500' : 'text-gray-200'}`} onClick={() => todoDeleteHandler(todo.id)}>Del</button>
+                </div> 
               </div>)
           })
         }
+        <div className="flex justify-between p-6">
+          {todos.length > 0 
+            ? <p>{`${todos.length} items left`}</p>
+            : <p>Add Item</p>
+          }
+          <p>Clear Completed</p>
+        </div>
       </div>
 
       <div className="flex gap-4">
