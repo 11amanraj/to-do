@@ -3,25 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --bgd: #E4E5F1;
+  --todo-box: #FAFAFA;
+  --active-todo: #484B6A;
+  --inactive-todo: #D2D3DB;
+  --check-mark: #9394A5;
+
+  --completed-gradient: linear-gradient(to bottom, #57DDFF, #C058F3);
+
+  --filter-active: #3A71FD;
+  --logo: #E4E5F1;
+  --create-todo: #777A92;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --bgd: #161722;
+    --todo-box: #25273C;
+    --active-todo: #CACDE8;
+    --inactive-todo: #4D5966;
+    --check-mark: #393A4C; 
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--bgd);
 }
