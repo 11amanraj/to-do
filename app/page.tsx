@@ -44,14 +44,14 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-8 my-8 flex flex-col gap-8">
+    <main className="mx-8 my-8 flex flex-col gap-8 text-active-todo">
       <div className="flex justify-between">
-        <h1 className="text-3xl">Whereas TODO</h1>
-        <button>D</button>
+        <h1 className="text-3xl text-logo">TODO</h1>
+        <button className="bg-logo">Light/Dark</button>
       </div>
 
       <form 
-        className="bg-gray-800 p-4 rounded flex gap-4" 
+        className="bg-gray-800 p-4 rounded flex gap-4 bg-todo-box" 
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
           if(inputRef.current) {
@@ -67,13 +67,13 @@ export default function Home() {
         <button className="text-gray-500">C</button>  
         <input 
           ref={inputRef} 
-          className="text-gray-500 bg-transparent" 
+          className="text-gray-500 bg-todo-box" 
           type="text"
           placeholder="Create a new todo..."
         />
       </form>
 
-      <div className="bg-gray-800 rounded overflow-hidden flex flex-col" >
+      <div className="bg-gray-800 rounded overflow-hidden flex flex-col bg-todo-box" >
         {todos
           .filter(todo => {
             if(!hideCompleted) {
@@ -102,7 +102,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-gray-800 p-4 rounded flex gap-4 justify-center">
+      <div className="bg-gray-800 p-4 rounded flex gap-4 justify-center bg-todo-box">
         <button onClick={() => setHideCompleted(false)} className={`${!hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>All</button>
         {/* <button onClick={() => setHideCompleted(false)} className={`bg-slate-700 ${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Active</button> */}
         <button onClick={() => setHideCompleted(true)} className={`${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Completed</button>
