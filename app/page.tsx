@@ -51,7 +51,7 @@ export default function Home() {
   // bg-[url('../app/images/bg-mobile-light.jpg')]
   return (
     <main className="flex flex-col text-active-todo">
-      <div className="p-8 bg-banner bg-cover -bottom-8 flex flex-col gap-8">
+      <div className="p-8 pb-24 bg-banner bg-cover flex flex-col gap-8">
         <div className="flex justify-between">
           <h1 className="text-3xl text-logo">TODO</h1>
           <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="bg-logo px-4 py-2">{resolvedTheme === "dark" ? "light" : "dark"}</button>
@@ -80,7 +80,7 @@ export default function Home() {
         </form>
       </div>
 
-      <div className="mt-4 m-8 bg-gray-800 rounded overflow-hidden flex flex-col bg-todo-box" >
+      <div className="relative -top-20 mt-4 m-8 bg-gray-800 rounded overflow-hidden flex flex-col bg-todo-box" >
         {todos
           .filter(todo => {
             if(!hideCompleted) {
