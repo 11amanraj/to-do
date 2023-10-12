@@ -2,6 +2,11 @@
 
 import { useTheme } from "next-themes"
 import { useRef, useState, useEffect } from "react"
+import Image from "next/image"
+import checkIcon from '../app/images/icon-check.svg'
+import crossIcon from '../app/images/icon-cross.svg'
+import moonIcon from '../app/images/icon-moon.svg'
+import sunIcon from '../app/images/icon-sun.svg'
 
 interface todo {
   id: string,
@@ -48,13 +53,13 @@ export default function Home() {
     })
     setTodos([...updatedTodos])
   }
-  // bg-[url('../app/images/bg-mobile-light.jpg')]
+
   return (
-    <main className="flex flex-col text-active-todo">
+    <main className="text-active-todo">
       <div className="p-8 pb-24 bg-banner bg-cover flex flex-col gap-8">
         <div className="flex justify-between">
           <h1 className="text-3xl text-logo">TODO</h1>
-          <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="bg-logo px-4 py-2">{resolvedTheme === "dark" ? "light" : "dark"}</button>
+          <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="bg-logo px-4 py-2">{resolvedTheme === "dark" ? <Image priority src={sunIcon} alt="light-mode" /> : <Image priority src={moonIcon} alt="dark-mode" />}</button>
         </div>
         <form 
           className="bg-gray-800 p-4 rounded flex gap-4 bg-todo-box" 
@@ -92,10 +97,10 @@ export default function Home() {
           .map(todo => {
             return (
               <div key={todo.id} className={`flex gap-4 p-6 border-b-2 border-b-slate-500`}>
-                <button className={`bg-slate-700 ${todo.completed ? 'text-gray-500' : 'text-gray-200'}`} onClick={() => todoCompleteHandler(todo.id)}>Done</button>
+                <button className={`bg-transparent ${todo.completed ? 'text-gray-500' : 'text-gray-200'}`} onClick={() => todoCompleteHandler(todo.id)}><Image priority src={checkIcon} alt="check" /></button>
                 <div className="w-full flex justify-between">
                   <p className={`${todo.completed ? 'line-through text-gray-500' : 'no-underline text-gray-200'}`}>{todo.text}</p>
-                  <button className={`bg-slate-700 ${todo.completed ? 'text-gray-500' : 'text-gray-200'}`} onClick={() => todoDeleteHandler(todo.id)}>Del</button>
+                  <button className={`bg-transparent ${todo.completed ? 'text-gray-500' : 'text-gray-200'}`} onClick={() => todoDeleteHandler(todo.id)}><Image priority src={crossIcon} alt="cross" /></button>
                 </div> 
               </div>)
           })
@@ -109,7 +114,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-4 m-8 bg-gray-800 p-4 rounded flex gap-4 justify-center bg-todo-box">
+      <div className="-mt-16 m-8 bg-gray-800 p-4 rounded flex gap-4 justify-center bg-todo-box">
         <button onClick={() => setHideCompleted(false)} className={`${!hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>All</button>
         {/* <button onClick={() => setHideCompleted(false)} className={`bg-slate-700 ${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Active</button> */}
         <button onClick={() => setHideCompleted(true)} className={`${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Completed</button>
