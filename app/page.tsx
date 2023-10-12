@@ -1,6 +1,7 @@
 'use client'
 
-import { useRef, useState } from "react"
+import { useTheme } from "next-themes"
+import { useRef, useState, useEffect } from "react"
 
 interface todo {
   id: string,
@@ -29,6 +30,11 @@ export default function Home() {
   const [hideCompleted, setHideCompleted] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
+
   const todoDeleteHandler = (id: string) => {
     const updatedTodos = todos.filter(todo => todo.id !== id)
     setTodos([...updatedTodos])
@@ -47,7 +53,7 @@ export default function Home() {
     <main className="mx-8 my-8 flex flex-col gap-8 text-active-todo">
       <div className="flex justify-between">
         <h1 className="text-3xl text-logo">TODO</h1>
-        <button className="bg-logo">Light/Dark</button>
+        <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="bg-logo px-4 py-2">{resolvedTheme === "dark" ? "light" : "dark"}</button>
       </div>
 
       <form 
