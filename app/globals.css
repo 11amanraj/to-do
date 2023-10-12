@@ -14,14 +14,28 @@
   --filter-active: #3A71FD;
   --logo: #FA;
   --create-todo: #777A92;
+
+  --banner: url('../app/images/bg-mobile-light.jpg')
 }
 
-[data-theme = 'dark'] {
+@media screen and (min-width: 400px) {
+  :root {
+    --banner: url('../app/images/bg-desktop-light.jpg')
+  }
+
+  [data-theme = 'dark']:root {
+    --banner: url('../app/images/bg-desktop-dark.jpg')
+  }
+}
+
+[data-theme = 'dark']:root {
   --bgd: #161722;
   --todo-box: #25273C;
   --active-todo: #CACDE8;
   --inactive-todo: #4D5966;
   --check-mark: #393A4C; 
+
+  --banner: url('../app/images/bg-desktop-dark.jpg')
 }
 
 body {

@@ -48,38 +48,39 @@ export default function Home() {
     })
     setTodos([...updatedTodos])
   }
-
+  // bg-[url('../app/images/bg-mobile-light.jpg')]
   return (
-    <main className="mx-8 my-8 flex flex-col gap-8 text-active-todo">
-      <div className="flex justify-between">
-        <h1 className="text-3xl text-logo">TODO</h1>
-        <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="bg-logo px-4 py-2">{resolvedTheme === "dark" ? "light" : "dark"}</button>
+    <main className="flex flex-col text-active-todo">
+      <div className="p-8 bg-banner bg-cover -bottom-8 flex flex-col gap-8">
+        <div className="flex justify-between">
+          <h1 className="text-3xl text-logo">TODO</h1>
+          <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="bg-logo px-4 py-2">{resolvedTheme === "dark" ? "light" : "dark"}</button>
+        </div>
+        <form 
+          className="bg-gray-800 p-4 rounded flex gap-4 bg-todo-box" 
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault()
+            if(inputRef.current) {
+              const todo = inputRef.current.value
+              setTodos(prev => [...prev, {
+                id: Math.random().toString(),
+                text: todo,
+                completed: false,
+              }])
+              inputRef.current.value = '' 
+            }
+        }}>
+          <button className="text-gray-500">C</button>  
+          <input 
+            ref={inputRef} 
+            className="text-gray-500 bg-todo-box" 
+            type="text"
+            placeholder="Create a new todo..."
+          />
+        </form>
       </div>
 
-      <form 
-        className="bg-gray-800 p-4 rounded flex gap-4 bg-todo-box" 
-        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-          e.preventDefault()
-          if(inputRef.current) {
-            const todo = inputRef.current.value
-            setTodos(prev => [...prev, {
-              id: Math.random().toString(),
-              text: todo,
-              completed: false,
-            }])
-            inputRef.current.value = '' 
-          }
-      }}>
-        <button className="text-gray-500">C</button>  
-        <input 
-          ref={inputRef} 
-          className="text-gray-500 bg-todo-box" 
-          type="text"
-          placeholder="Create a new todo..."
-        />
-      </form>
-
-      <div className="bg-gray-800 rounded overflow-hidden flex flex-col bg-todo-box" >
+      <div className="mt-4 m-8 bg-gray-800 rounded overflow-hidden flex flex-col bg-todo-box" >
         {todos
           .filter(todo => {
             if(!hideCompleted) {
@@ -108,7 +109,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-gray-800 p-4 rounded flex gap-4 justify-center bg-todo-box">
+      <div className="mt-4 m-8 bg-gray-800 p-4 rounded flex gap-4 justify-center bg-todo-box">
         <button onClick={() => setHideCompleted(false)} className={`${!hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>All</button>
         {/* <button onClick={() => setHideCompleted(false)} className={`bg-slate-700 ${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Active</button> */}
         <button onClick={() => setHideCompleted(true)} className={`${hideCompleted ? 'text-blue-600' : 'text-gray-300'}`}>Completed</button>
